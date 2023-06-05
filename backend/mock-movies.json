@@ -1,0 +1,9 @@
+{
+  "movies": [
+    {
+      "title": "John Wick",
+      "genre": "Action, Thriller",
+      "year": 2014
+    }
+  ]
+}

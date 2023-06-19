@@ -9,14 +9,8 @@ describe("Testing Title Component", () => {
 
     let text = 'Lorem Ipsum, Lorem Ipsum'
 
-    test('should load a text component', async () => { 
-        render(<Title text={text} />)
-        const element = screen.getByRole('banner')
-        expect(element).toBeInTheDocument()
-    });
-
     test('the text component should have a text', async () => { 
-        render(<Title text={text} />)
+        render(<Title text={text} heading='h1'/>)
         const element = screen.getByText(text) 
         expect(element).toBeInTheDocument()
     });

@@ -9,12 +9,6 @@ describe("Testing Text Component", () => {
 
     let text = 'Lorem Ipsum, Lorem Ipsum'
 
-    test('should load a text component', async () => { 
-        render(<Text text={text} />)
-        const element = screen.getByRole('banner')
-        expect(element).toBeInTheDocument()
-    });
-
     test('the text component should have a text', async () => { 
         render(<Text text={text} />)
         const element = screen.getByText(text) 

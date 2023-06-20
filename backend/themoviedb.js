@@ -30,15 +30,15 @@ export async function getMoviesData(movieData) {
     })
   );
 
-  console.log(
-    "🚀 ~ file: themoviedb.js:29 ~ awaitPromise.all ~ moviesIds:",
-    moviesIds
-  );
+  // console.log(
+  //   "🚀 ~ file: themoviedb.js:29 ~ awaitPromise.all ~ moviesIds:",
+  //   moviesIds
+  // );
   //search for movies by id
   await Promise.all(
     moviesIds.map(async (id) => {
       const url = `${process.env.MOVIE_API_URL_IDS}${id}${baseConfigIds}`;
-      console.log("🚀 ~ file: themoviedb.js:36 ~ awaitPromise.all ~ url:", url);
+     // console.log("🚀 ~ file: themoviedb.js:36 ~ awaitPromise.all ~ url:", url);
       const response = await fetch(url, options)
         .then((res) => res.json())
         .then((json) => json)
@@ -48,6 +48,6 @@ export async function getMoviesData(movieData) {
     })
   );
 
-  console.log("🚀 ~ file: themoviedb.js:30 ~ getMoviesData ~ output:", output);
+ // console.log("🚀 ~ file: themoviedb.js:30 ~ getMoviesData ~ output:", output);
   return output;
 }

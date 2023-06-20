@@ -1,0 +1,21 @@
+
+@use "../../styles/colors.scss";
+@use "../../styles/configs.scss";
+
+.content{
+  display: flex;
+  width: 100%;
+  background-color: colors.$dark-gray;
+  border-radius: configs.$space-1;
+  padding: configs.$space-1;
+  justify-items: center;
+  align-items: center;
+
+  img {
+    margin: 0 8px;
+  }
+
+  ul {
+    display: inline-flex;
+  }
+}

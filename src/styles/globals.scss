@@ -1,0 +1,12 @@
+
+@use 'colors';
+@use 'styles';
+
+$font-stack: Helvetica, sans-serif;
+
+body {
+  font: 100% $font-stack;
+  padding: 0;
+  margin: 0;
+  background-color: colors.$body-background;
+}

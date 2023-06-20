@@ -5,7 +5,18 @@
 */
 import styles from './styles.module.scss'
 import  React from 'react'
+import YouTube from 'react-youtube';
 
-export default function Video({ url } : { url: string}) {
-    return(<p>{ url }</p>)
+const opts = {
+    height: '200',
+    width: '300',
+  };
+
+export default function Video({ videoKey, site, title } : { videoKey: string, site:string, title:string}) {
+    switch (site) {
+        case 'YouTube':
+            return (<><YouTube videoId={videoKey} opts={opts} title={title}  /></>)
+        default:
+            return (<>{ site }</>)
+    }
 }

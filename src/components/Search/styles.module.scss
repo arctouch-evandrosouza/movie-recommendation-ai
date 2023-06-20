@@ -1,0 +1,42 @@
+@use "../../styles/colors.scss";
+@use "../../styles/configs.scss";
+
+.search {
+  width: 50%;
+  margin: 0 auto;
+  padding: configs.$space-3;
+  display: flex;
+  flex-direction: column; 
+  font-size: 1.2em;
+  color: colors.$dark-gray;
+ 
+  input {
+    width: 100%;
+    background-color: colors.$light-gray;
+    padding: configs.$space-2;
+    font-size: 1em;
+    color: colors.$dark-gray;
+    margin-bottom: configs.$space-1;
+    outline: none;
+    border-radius: configs.$space-1;
+  }
+  
+  button {
+    width: 30%;
+    margin: 0 auto;
+    background-color: colors.$purple;
+    padding: configs.$space-1;
+    font-size: 1.2em;
+    color: colors.$light-gray;
+    border-radius: configs.$space-1;
+  }
+
+  p {
+    width: 100;
+    color: colors.$light-gray;
+    margin-bottom: configs.$space-2;
+    text-align: right;
+    display: block;
+    font-size: 0.8em;
+  }
+}

@@ -1,0 +1,15 @@
+
+@use '../../styles/colors.scss';
+@use '../../styles/configs.scss';
+
+.header {
+    width: 100%;
+    background-color: colors.$purple;
+    justify-content: center ;
+    justify-items: center;
+    display: grid;
+    padding: configs.$space-2;
+    font-size: 1.2em;
+    color: colors.$light-gray;
+    font-weight: bold;
+}

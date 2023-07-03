@@ -9,26 +9,36 @@ import Title from '@/components/Title'
 import Text from '@/components/Text'
 import { useEffect, useState } from "react"
 import Loading from "@/components/Loading"
+import { LANGUAGES } from '../_i18n/languages';
+import { TextLanguageSelector } from "../utils/utils"
+
 
 export default function Home() {
+ 
 
+  const [language, setLanguage] = useState(LANGUAGES.default)
+  const [currentLanguage, setCurrentLanguage] = useState(Object)
   const [recommendations, setRecommendations] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
+
+  useEffect(() => {
+    setCurrentLanguage(TextLanguageSelector(language))
+  },[language])
+  
+
   return (
-
     <>
-      <TopBar text="MOVIES RECOMMENDATION" />
+      <TopBar text={currentLanguage.header_text} setLanguage={setLanguage} />
       <div className={styles.text}>
-        <Title text='What do you want to watch today?' heading='h2' />
-
-        <Text text='I&apos;m going to try to find some movies for you, and I would like some tips...' />
+        <Title text={currentLanguage.home_line1} heading='h2' />
+        <Text text={currentLanguage.home_line2} />
         <br />
 
-        <Text text='Describe in few word what you wanna watch example:' />
-        <Text text='Dinosaur theme park turns deadly adventure or Epic space saga with lightsabers battles...' />
+        <Text text={currentLanguage.home_line3} />
+        <Text text={currentLanguage.home_line4} />
       </div>
-      <Search setRecommendations={setRecommendations} setIsLoading={setIsLoading} />
+      <Search setRecommendations={setRecommendations} setIsLoading={setIsLoading} currentLanguage={currentLanguage}/>
 
       {recommendations.length > 0 &&
         <>

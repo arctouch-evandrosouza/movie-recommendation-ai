@@ -1,12 +1,17 @@
-//import fetch from "node-fetch";
+import {
+  MovieInterface,
+  VideoInterface,
+  watchProvidersInterface,
+} from "@/interfaces/MovieInterfaces";
 
-export async function getMoviesData(movieData: any) {
+export async function getMoviesData(movieData: any, language: string | null) {
   let output: any = [];
   let moviesIds: any = [];
 
-  const baseConfigSearch =
-    "&include_adult=false&language=en-US&page=1&append_to_response=videos";
-  const baseConfigIds = "?append_to_response=videos&language=en-US";
+  const resultLanguage = language ?? "en-US";
+
+  const baseConfigSearch = `&include_adult=false&language=${resultLanguage}&page=1&append_to_response=videos`;
+  const baseConfigIds = `?append_to_response=videos&language=${resultLanguage}`;
 
   const options = {
     method: "GET",
@@ -25,35 +30,79 @@ export async function getMoviesData(movieData: any) {
       const response = await fetch(url, options)
         .then((res) => res.json())
         .then((json) => json)
-        .catch((err) => console.error("error:" + err));
-      moviesIds.push(response.results[0].id);
+        .catch((err) => {
+          return console.error("error:" + err);
+        });
+      if (response.results[0]?.id) {
+        moviesIds.push(response.results[0].id);
+      }
     })
   );
 
-  // console.log(
-  //   "🚀 ~ file: themoviedb.js:29 ~ awaitPromise.all ~ moviesIds:",
-  //   moviesIds
-  // );
   //search for movies by id
   await Promise.all(
     moviesIds.map(async (id: any) => {
       const url = `${process.env.MOVIE_API_URL_IDS}${id}${baseConfigIds}`;
-     // console.log("🚀 ~ file: themoviedb.js:36 ~ awaitPromise.all ~ url:", url);
       const response = await fetch(url, options)
         .then((res) => res.json())
         .then((json) => json)
         .catch((err) => console.error("error:" + err));
-
       output.push(response);
     })
   );
 
- // console.log("🚀 ~ file: themoviedb.js:30 ~ getMoviesData ~ output:", output);
-  return output;
+  const movies = await handleRawMovieResponse(output, resultLanguage);
+  return movies;
 }
 
+const handleRawMovieResponse = async (rawMovieData: any, resultLanguage: string) => {
+  const movies: MovieInterface[] = [];
 
-export async function  getMoviesWatchProvides(movie_id: any) {
+  await Promise.all(
+    rawMovieData.map(async (movie: any) => {
+      const trailer = getTrailer(movie.videos);
+
+      const watchProviders = await getWatchProvides(movie.id, resultLanguage);
+
+      movies.push({
+        id: movie.id,
+        title: movie.title,
+        date: movie.release_date,
+        duration: movie.runtime,
+        genres: movie.genres,
+        description: movie.overview,
+        image: process.env.MOVIE_IMG_URL + movie.poster_path,
+        video: trailer,
+        watchProviders,
+      });
+    })
+  );
+
+  return movies;
+};
+
+const getTrailer = (videos: any): VideoInterface => {
+  const selectedVideo = videos.results.filter(
+    (video: any) => video.type === "Trailer"
+  );
+
+  let video: VideoInterface = {
+    key: null,
+    site: null,
+  };
+
+  if (selectedVideo) {
+    video = {
+      key: selectedVideo[0]?.key ? selectedVideo[0].key : null,
+      site: selectedVideo[0]?.site ? selectedVideo[0].site : null,
+    };
+  }
+
+  return video;
+};
+
+const getWatchProvides = async (movieId: number, resultLanguage: string) => {
+  let providers: watchProvidersInterface[] = [];
 
   const options = {
     method: "GET",
@@ -63,13 +112,35 @@ export async function  getMoviesWatchProvides(movie_id: any) {
     },
   };
 
-
-  const url = `https://api.themoviedb.org/3/movie/${movie_id}/watch/providers`;
-  const response = await fetch(url, options)
+  const url = `${process.env.MOVIE_API_URL_IDS}${movieId}/watch/providers`;
+  const watchProviders = await fetch(url, options)
     .then((res) => res.json())
     .then((json) => json)
     .catch((err) => console.error("error:" + err));
-  console.log("🚀 ~ file: themoviedb.ts:72 ~ getMoviesWatchProvides ~ response:", response)
-  return response.results;
 
-}
+  if (!watchProviders) return providers;
+
+  if (resultLanguage === "en-US") {
+    if (watchProviders.results.US.flatrate) {
+      watchProviders.results.US.flatrate.forEach(
+        (provider: { logo_path: string; provider_name: any }) =>
+          providers.push({
+            logo_path: "https://image.tmdb.org/t/p/w500" + provider.logo_path,
+            provider_name: provider.provider_name,
+          })
+      );
+    }
+  } else if (resultLanguage === "pt-BR") {
+    if (watchProviders.results.BR.flatrate) {
+      watchProviders.results.BR.flatrate.forEach(
+        (provider: { logo_path: string; provider_name: any }) =>
+          providers.push({
+            logo_path: "https://image.tmdb.org/t/p/w500" + provider.logo_path,
+            provider_name: provider.provider_name,
+          })
+      );
+    }
+  }
+
+  return providers;
+};

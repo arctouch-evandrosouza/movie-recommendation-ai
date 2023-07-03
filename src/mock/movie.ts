@@ -388,26 +388,12 @@ const rawData = [
   },
 ];
 
-const getTrailer = (videos: any): VideoInterface | null => {
-  const selectedVideo = videos.results.filter(
-    (video: any) => video.type === "Trailer"
-  );
-  console.log("🚀 ~ file: movie.ts:395 ~ getTrailer ~ selectedVideo:", selectedVideo)
-  if (!selectedVideo) return null;
 
-  const video: VideoInterface = {
-    key: selectedVideo[0].key,
-    site: selectedVideo[0].site,
-  };
-  console.log("🚀 ~ file: movie.ts:402 ~ getTrailer ~ video:", video)
-
-  return video;
-};
 
 const getWatchProvides = (movie_id: any): watchProvidersInterface[] | null => {
   if (!watchProviders) return null;
   let providers: watchProvidersInterface[] = [];
-  watchProviders.results.BR.flatrate.forEach((provider: { logo_path: string; provider_name: any; }) =>
+  watchProviders.results.US.flatrate.forEach((provider: { logo_path: string; provider_name: any; }) =>
     providers.push({
       logo_path: "https://image.tmdb.org/t/p/w500" + provider.logo_path,
       provider_name: provider.provider_name,
@@ -417,7 +403,6 @@ const getWatchProvides = (movie_id: any): watchProvidersInterface[] | null => {
   return providers;
 };
 
-//const genres: Genre[] = [{ title: "action" }, { title: "other" }];
 
 const movies: MovieInterface[] = [];
 

@@ -1,22 +1,25 @@
-/*
 
-- load  video by url 
-
-*/
-import styles from './styles.module.scss'
-import  React from 'react'
+import React from 'react'
 import YouTube from 'react-youtube';
+import Vimeo from '@u-wave/react-vimeo';
 
-const opts = {
-    height: '200',
-    width: '300',
-  };
+export default function Video({ videoKey, site, title }: { videoKey: string | null, site: string | null, title: string }) {
 
-export default function Video({ videoKey, site, title } : { videoKey: string, site:string, title:string}) {
+    const videoWidth = 300;
+    const videoHeight = 200;
+    const opts = {
+        height: videoHeight,
+        width: videoWidth,
+    };
+
+    if(!videoKey) return (<></>)
+
     switch (site) {
         case 'YouTube':
-            return (<><YouTube videoId={videoKey} opts={opts} title={title}  /></>)
+            return (<><YouTube videoId={videoKey} opts={opts} title={title} /></>)
+        case 'Vimeo':
+            return (<><Vimeo video={videoKey} width={videoWidth} height={videoHeight} /></>)
         default:
-            return (<>{ site }</>)
+            return (<></>)
     }
 }

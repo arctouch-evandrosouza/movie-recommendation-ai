@@ -1,11 +1,12 @@
 export interface MovieInterface {
+    id: number,
     title: string,
     date: string,
     duration: number,
     genres: GenreInterface[],
     description: string
     image: string,
-    video: VideoInterface | null,
+    video: VideoInterface,
     watchProviders: watchProvidersInterface[] | null,
 }
 
@@ -15,8 +16,8 @@ export interface watchProvidersInterface {
 }
 
 export interface VideoInterface {
-    key: string,
-    site: string,
+    key: string | null,
+    site: string | null,
 }
 
 export interface GenreInterface {

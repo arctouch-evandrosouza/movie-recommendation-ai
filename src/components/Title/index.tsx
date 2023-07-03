@@ -15,7 +15,9 @@ export default function Title({ text, heading }: { text: string, heading: string
             return (<><h2 className={styles.title}>{text}</h2></>)
         case 'h3':
             return (<><h3 className={styles.title}>{text}</h3></>)
+        case 'h4':
+            return (<><h4 className={styles.title}>{text}</h4></>)
         default:
-            return (<>{ text }</>)
+            return (<>{text}</>)
     }
 }

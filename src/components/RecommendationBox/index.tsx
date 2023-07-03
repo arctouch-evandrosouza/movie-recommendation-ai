@@ -1,20 +1,11 @@
-
-/*
-
-- load image component
-- load header component
-- load title component
-- load text component
-- load streaming component
-- load video component
-
-*/
 import styles from './styles.module.scss'
 import React from 'react'
 import { MovieInterface, GenreInterface } from '@/interfaces/MovieInterfaces'
-import RecommendationWatchProviders from '../RecommendationWatchProviders'
-import RecommendationImage from '../RecommendationImage'
-import Video from '../Video'
+import RecommendationWatchProviders from '@/components/RecommendationWatchProviders'
+import RecommendationImage from '@/components/RecommendationImage'
+import Video from '@/components/Video'
+import Title from '@/components/Title'
+import Text from '@/components/Text'
 
 
 export default function RecommendationBox({ movie }: { movie: MovieInterface }) {
@@ -25,10 +16,10 @@ export default function RecommendationBox({ movie }: { movie: MovieInterface }) 
         </div>
         <div>
             <div className={styles.text}>
-                <h4>{movie.title}</h4>
+                <Title text={movie.title} heading={'h4'} />
                 <small>{movie.date} | {movie.duration} min</small>
                 <div className={styles.genres}><strong>Genre: </strong><ul>{movie.genres.map((genre: GenreInterface) => <li key={genre.name}>{genre.name}</li>)}</ul></div>
-                <p>{movie.description}</p>
+                <Text text={movie.description} />
 
             </div>
             <div className={styles.streaming}>

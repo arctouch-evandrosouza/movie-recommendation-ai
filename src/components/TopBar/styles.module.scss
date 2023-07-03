@@ -5,11 +5,25 @@
 .header {
     width: 100%;
     background-color: colors.$purple;
-    justify-content: center ;
+    justify-content: space-around ;
     justify-items: center;
-    display: grid;
+    display: flex;
     padding: configs.$space-2;
     font-size: 1.2em;
     color: colors.$light-gray;
     font-weight: bold;
+
+    ul {
+        display: flex;
+
+        li {
+            padding: 0 8px;
+            border-right: 1px colors.$light-gray solid;
+            cursor: pointer;
+        }
+        li:last-child {
+            border-right: none;
+        }
+
+    }
 }

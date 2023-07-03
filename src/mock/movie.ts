@@ -406,18 +406,20 @@ const getWatchProvides = (movie_id: any): watchProvidersInterface[] | null => {
 
 const movies: MovieInterface[] = [];
 
-rawData.forEach((movie) => {
-  let trailer = getTrailer(movie.videos);
-
-  movies.push({
+rawData.forEach((movie) => {  
+  return movies.push({
     title: movie.original_title,
     date: movie.release_date,
     duration: movie.runtime,
     genres: movie.genres,
     description: movie.overview,
     image: "https://image.tmdb.org/t/p/w500" + movie.poster_path,
-    video: trailer,
+    video: {
+      key: null,
+      site: null,
+    },
     watchProviders: getWatchProvides(movie.id),
+    id: 0
   });
 });
 

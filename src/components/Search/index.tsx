@@ -32,7 +32,7 @@ export default function Search({setRecommendations, setIsLoading, currentLanguag
 
             setIsLoading(true)
 
-            const searchUrl = `${process.env.NEXT_PUBLIC_BASE_URL}api/search?search=${search}&language=${currentLanguage.language}`
+            const searchUrl = `api/search?search=${search}&language=${currentLanguage.language}`
             const response = await fetch(searchUrl)
             const jsonData = await response.json()
             const movies = jsonData.movies;

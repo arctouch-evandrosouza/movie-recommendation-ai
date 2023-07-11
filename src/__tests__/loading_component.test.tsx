@@ -9,7 +9,7 @@ describe("Testing Loading Component", () => {
  
     test('should load the component', async () => { 
         render(<Loading   />)
-        const element = screen.getByRole('')
+        const element = screen.getByRole('img')
         expect(element).toBeInTheDocument()
     });
 });

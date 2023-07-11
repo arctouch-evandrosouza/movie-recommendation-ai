@@ -1,12 +1,16 @@
 import { Configuration, OpenAIApi } from "openai";
 
-export async function getMoviesFromChatGPT(rawContent: string, language: string | null) {
+export async function getMoviesFromChatGPT(
+  rawContent: string,
+  language: string | null
+) {
+  let content = `Bring me 3 movies based on this sentence "${rawContent}" and answer me just the names in json, example { "movies": [ "movie1", "movie2", "movie3" ] }`;
+  if (language === "pt-BR") {
+    //need more tests
+    // content = `Traga-me 3 filmes baseados nesta frase "${rawContent}" e me responda apenas os nomes em json, exemplo { "movies": [ "movie1", "movie2", "movie3" ] }`;
+  }
 
-
-  // const resultLanguage = language ?? 'en-US'
-  // const content = `Me indique 2 filmes com base nesta frase: ${rawContent} me responda apenas os nome separados por virgula`;
-  const content = `Bring me 3 movies based on this sentence "${rawContent}" and answer me just the names in json, example { "movies": [ "movie1", "movie2", "movie3" ] }`;
-
+  console.log("🚀 ~ file: chatgpt.ts:11 ~ content:", content);
   const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
   });
@@ -20,6 +24,10 @@ export async function getMoviesFromChatGPT(rawContent: string, language: string 
 
     if (completion.data.choices[0].message?.content) {
       const completion_text = completion.data.choices[0].message.content;
+      console.log(
+        "🚀 ~ file: chatgpt.ts:29 ~ completion_text:",
+        completion_text
+      );
       return completion_text;
     }
   } catch (error: any) {

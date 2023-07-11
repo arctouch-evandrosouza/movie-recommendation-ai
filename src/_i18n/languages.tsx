@@ -14,7 +14,10 @@ export const TEXTS = {
     search_placeholder: 'Tente algo...',
     search_button: 'ENVIAR',
     search_aria_label: 'Adicione um texto para buscar filmes',
-    search_button_aria_label: 'Botão enviar '
+    search_button_aria_label: 'Botão enviar',
+    genre_text: 'Genero:',
+    watch_provider_text: 'Onde Assistir:',
+    results_text: 'Some suggestions for you...'
   },
   en: {
     language: 'en-US',
@@ -26,6 +29,9 @@ export const TEXTS = {
     search_placeholder: 'Try something...',
     search_button: 'SEND',
     search_aria_label: 'Add a text to search movies',
-    search_button_aria_label: 'Button send'
+    search_button_aria_label: 'Button send',
+    genre_text: 'Genre:',
+    watch_provider_text: 'Watch on:',
+    results_text: 'Algumas sugestoes para você...'
   },
 };

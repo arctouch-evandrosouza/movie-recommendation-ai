@@ -2,7 +2,6 @@
 import RecommendationBox from "@/components/RecommendationBox"
 import Search from "@/components/Search"
 import TopBar from "@/components/TopBar"
-import { movies } from "@/mock/movie"
 import { MovieInterface } from "@/interfaces/MovieInterfaces"
 import styles from "@/styles/styles.module.scss"
 import Title from '@/components/Title'
@@ -43,11 +42,11 @@ export default function Home() {
       {recommendations.length > 0 &&
         <>
           <div className={styles.text}>
-            <Title text='We got some suggestions for you....' heading='h3' />
+            <Title text={currentLanguage.results_text} heading='h3' />
           </div>
 
           <div className={styles.content}>
-            {recommendations.map((movie: MovieInterface) => <RecommendationBox key={movie.title} movie={movie} />)}
+            {recommendations.map((movie: MovieInterface) => <RecommendationBox key={movie.title} movie={movie} currentLanguage={currentLanguage} />)}
           </div>
         </>
  }

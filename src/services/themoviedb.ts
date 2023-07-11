@@ -121,7 +121,7 @@ const getWatchProvides = async (movieId: number, resultLanguage: string) => {
   if (!watchProviders) return providers;
 
   if (resultLanguage === "en-US") {
-    if (watchProviders.results.US.flatrate) {
+    if (watchProviders.results.US?.flatrate !== undefined) {
       watchProviders.results.US.flatrate.forEach(
         (provider: { logo_path: string; provider_name: any }) =>
           providers.push({
@@ -131,7 +131,7 @@ const getWatchProvides = async (movieId: number, resultLanguage: string) => {
       );
     }
   } else if (resultLanguage === "pt-BR") {
-    if (watchProviders.results.BR.flatrate) {
+    if (watchProviders.results.BR?.flatrate !== undefined) {
       watchProviders.results.BR.flatrate.forEach(
         (provider: { logo_path: string; provider_name: any }) =>
           providers.push({

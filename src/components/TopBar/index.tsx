@@ -17,7 +17,7 @@ export default function TopBar({ text, setLanguage } : { text: string, setLangua
     }
 
     return(<header className={styles.header}>
-        <Title text={ text } heading='h1' />
+        <div className={styles.logo}><i className="fa fa-video"></i><Title text={ text } heading='h1' /></div>
         <ul> {LANGUAGES.languages.map((language: any) => <li onClick={() => setLanguage(language.value)} key={language.value}>{ language.value }</li>)}</ul>
         </header>)
 }

@@ -4,7 +4,8 @@ import '@testing-library/jest-dom'
 import RecommendationWatchProviders from '../components/RecommendationWatchProviders';
 import { movies } from '../mock/movie';
 
-jest.mock('next/router', () => require('next-router-mock'));
+import { TEXTS } from '../_i18n/languages';
+const currentLanguage = TEXTS.en;
 
 describe("Testing RecommendationWatchProviders Component", () => {
  
@@ -13,7 +14,7 @@ describe("Testing RecommendationWatchProviders Component", () => {
 
         const watchProviders = movies[0].watchProviders;
         const countWatchProviders = watchProviders?.length
-        render(<RecommendationWatchProviders  watchProviders={watchProviders}  />)
+        render(<RecommendationWatchProviders  watchProviders={watchProviders} currentLanguage={currentLanguage} />)
 
         const items = screen.getAllByRole("listitem")
         expect(items.length).toBe(countWatchProviders)

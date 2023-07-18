@@ -10,13 +10,13 @@ describe("Testing TopBar Component", () => {
     let text = 'Movies Recommendations By AI'
 
     test('should load a text on top bar', async () => { 
-        render(<TopBar text={text} />)
+        render(<TopBar text={text} setLanguage={()=>{}}/>)
         const element = screen.getByRole('banner')
         expect(element).toBeInTheDocument()
     });
 
     test('the top bar should have a text', async () => { 
-        render(<TopBar text={text} />)
+        render(<TopBar text={text} setLanguage={()=>{}} />)
         const element = screen.getByText(text) 
         expect(element).toBeInTheDocument()
     });

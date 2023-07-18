@@ -13,18 +13,19 @@ import { TextLanguageSelector } from "../utils/utils"
 
 
 export default function Home() {
- 
+
 
   const [language, setLanguage] = useState(LANGUAGES.default)
   const [currentLanguage, setCurrentLanguage] = useState(Object)
   const [recommendations, setRecommendations] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
 
 
   useEffect(() => {
     setCurrentLanguage(TextLanguageSelector(language))
-  },[language])
-  
+  }, [language])
+
 
   return (
     <>
@@ -37,7 +38,7 @@ export default function Home() {
         <Text text={currentLanguage.home_line3} />
         <Text text={currentLanguage.home_line4} />
       </div>
-      <Search setRecommendations={setRecommendations} setIsLoading={setIsLoading} currentLanguage={currentLanguage}/>
+      <Search setRecommendations={setRecommendations} setIsLoading={setIsLoading} setIsError={setIsError} currentLanguage={currentLanguage} />
 
       {recommendations.length > 0 &&
         <>
@@ -49,9 +50,12 @@ export default function Home() {
             {recommendations.map((movie: MovieInterface) => <RecommendationBox key={movie.title} movie={movie} currentLanguage={currentLanguage} />)}
           </div>
         </>
- }
- 
- {isLoading && <Loading />}
+      }
+      {isError && <div className={styles.text}>
+        <Title text={currentLanguage.no_results_text} heading='h3' />
+      </div>}
+
+      {isLoading && <Loading />}
     </>
   )
 }

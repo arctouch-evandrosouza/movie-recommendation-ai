@@ -17,14 +17,15 @@ export const TEXTS = {
     search_button_aria_label: 'Botão enviar',
     genre_text: 'Genero:',
     watch_provider_text: 'Onde Assistir:',
-    results_text: 'Some suggestions for you...'
+    results_text: 'Algumas sugestoes para você...',
+    no_results_text: 'Desculpe, nenhum resultado encontrado, tente novamente...'
   },
   en: {
     language: 'en-US',
     header_text: "MOVIES RECOMMENDATION BY CHATGPT",
     home_line1: 'What do you want to watch today?',
     home_line2: "I'm gonna try to find some movies for you, give me a tip...",
-    home_line3: 'Describe in few word what you wanna watch for example',
+    home_line3: 'Describe in a few words what you wanna watch for example',
     home_line4: 'Dinosaur theme park turns deadly adventure or Epic space saga with lightsabers battles...',
     search_placeholder: 'Try something...',
     search_button: 'SEND',
@@ -32,6 +33,7 @@ export const TEXTS = {
     search_button_aria_label: 'Button send',
     genre_text: 'Genre:',
     watch_provider_text: 'Watch on:',
-    results_text: 'Algumas sugestoes para você...'
+    results_text: 'Some suggestions for you...',
+    no_results_text: 'Sorry, no results found, please try again...'
   },
 };
